@@ -1,0 +1,25 @@
+{
+    "name": "iamirnet/twitter-php",
+    "description": "Twitter PHP",
+    "keywords": ["php","twitter", "twitter-php"],
+    "homepage": "https://php.iamir.net/packages/twitter",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name" : "iamirnet",
+            "email" : "me@iamir.net",
+            "homepage": "https://iamir.net",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "src"
+        ],
+        "psr-4": {
+            "iAmirNet\\Twitter\\": "src/"
+        }
+    }
+}
