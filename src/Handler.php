@@ -125,7 +125,7 @@ class Handler
             );
             $mediaIds[] = $res->media_id_string;
         }
-       // $media['media_ids'] = ['media_ids' => implode(',', $mediaIds) ?: null];
+        // $media['media_ids'] = ['media_ids' => implode(',', $mediaIds) ?: null];
         return $this->request(
             'tweets',
             'JSONPOST',
@@ -198,11 +198,10 @@ class Handler
      * https://dev.twitter.com/rest/reference/get/users/show
      * @throws Exception
      */
-    public function loadUserInfo(string $username): stdClass
+    public function loadUserInfo(string $username, $fields = ["id","name","public_metrics","username"]): stdClass
     {
-        return $this->cachedRequest('users/by', ['usernames' => $username]);
+        return $this->cachedRequest('users/by', ['usernames' => $username, 'user.fields' => $fields]);
     }
-
 
     /**
      * Returns information of a given user by id.
@@ -306,7 +305,7 @@ class Handler
             $resource = join('/', [self::API_URL,$api_version, $resource]);
         }
         if (isset($this->user_id) && $this->user_id)
-        $resource = str_replace(':id', $this->user_id, $resource);
+            $resource = str_replace(':id', $this->user_id, $resource);
         foreach ($data as $key => $val) {
             if ($val === null) {
                 unset($data[$key]);
@@ -330,7 +329,7 @@ class Handler
         } elseif ($method === 'QUERYPOST') {
             $method = 'POST';
             $data = http_build_query($data);
-           // $headers[] = 'Content-Type: application/json';
+            // $headers[] = 'Content-Type: application/json';
 
         } elseif (($method === 'GET' || $method === 'DELETE') && $data) {
             $resource .= '?' . http_build_query($data, '', '&');
